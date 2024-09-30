@@ -13,4 +13,4 @@ COPY ./builds/todo_app ./cmd/
 
 RUN mkdir database
 
-#CMD ["cmd/todo_app"]
+CMD ["cmd/todo_app"]

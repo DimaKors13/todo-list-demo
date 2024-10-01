@@ -121,13 +121,13 @@ func (storage Storage) GetTask(taskId string) (*tasks.Task, error) {
 	query := "SELECT id, date, title, comment, repeat FROM scheduler WHERE id = :id"
 	row := storage.db.QueryRow(query, sql.Named("id", id))
 
-	result := tasks.Task{}
-	err = row.Scan(&result.Id, &result.Date, &result.Title, &result.Comment, &result.Repeat)
+	result := &tasks.Task{}
+	err = row.Scan(result.Id, result.Date, result.Title, result.Comment, result.Repeat)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read task from query result: %w", err)
 	}
 
-	return &result, nil
+	return result, nil
 }
 
 func (storage Storage) UpdateTask(task *tasks.Task) error {
